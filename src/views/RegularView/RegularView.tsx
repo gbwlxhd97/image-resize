@@ -7,17 +7,43 @@ import st from './RegularView.module.css';
 
 // 해상도 설정 정의
 const RESOLUTIONS = [
-  { width: 200, height: 200, label: 'Thumbnail' },
-  { width: 800, height: 600, label: 'Small' },
-  { width: 1200, height: 900, label: 'Medium' },
-  { width: 1920, height: 1080, label: 'Full HD' },
-  { width: 3840, height: 2160, label: '4K' },
+  { width: 2000, height: 570, label: '메인 배너' },
+  { width: 1098, height: 318, label: '서브 배너' },
+  { width: 720, height: 720, label: '정사각형' },
+  { width: 549, height: 261, label: '중형 배너' },
+  { width: 366, height: 204, label: '소형 배너 가로' },
+  { width: 366, height: 522, label: '소형 배너 세로' },
+  { width: 366, height: 261, label: '소형 배너 중간' },
+  { width: 260, height: 145, label: '썸네일' },
 ] as const;
 
 type SelectedResolutions = {
   [key: string]: {
     [resolution: string]: boolean;
   };
+};
+
+const getAspectRatioClass = (label: string) => {
+  switch (label) {
+    case '메인 배너':
+      return st.mainBanner;
+    case '서브 배너':
+      return st.subBanner;
+    case '정사각형':
+      return st.square;
+    case '중형 배너':
+      return st.mediumBanner;
+    case '소형 배너 가로':
+      return st.smallBannerH;
+    case '소형 배너 세로':
+      return st.smallBannerV;
+    case '소형 배너 중간':
+      return st.smallBannerM;
+    case '썸네일':
+      return st.thumbnail;
+    default:
+      return '';
+  }
 };
 
 UC.defineComponents(UC);
@@ -164,11 +190,17 @@ export default function RegularView() {
                     />
                     {resolution.label} ({resolution.width}x{resolution.height})
                   </label>
-                  <img
-                    className={st.previewImage}
-                    src={`${file.cdnUrl}/-/preview/-/resize/${resolution.width}x${resolution.height}/`}
-                    alt={`${resolution.label} - ${file.fileInfo.originalFilename}`}
-                  />
+                  <div
+                    className={`${st.imageWrapper} ${getAspectRatioClass(
+                      resolution.label
+                    )}`}
+                  >
+                    <img
+                      className={st.previewImage}
+                      src={`${file.cdnUrl}/-/preview/-/resize/${resolution.width}x${resolution.height}/`}
+                      alt={`${resolution.label} - ${file.fileInfo.originalFilename}`}
+                    />
+                  </div>
                 </div>
               ))}
             </div>

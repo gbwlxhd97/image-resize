@@ -27,45 +27,46 @@
 
 .resolutionGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
+  width: 100%;
 }
 
 .resolutionItem {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 12px;
   padding: 16px;
   border: 1px solid #eee;
   border-radius: 8px;
+  background: #fff;
 }
 
-.resolutionLabel {
-  font-size: 1rem;
-  margin: 0 0 12px 0;
-  color: #444;
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: calc(var(--aspect-ratio) * 100%);
+  overflow: hidden;
+  border-radius: 4px;
 }
 
 .previewImage {
-  max-width: 100%;
-  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 4px;
-  margin-bottom: 12px;
-}
-
-.downloadLink {
-  display: inline-block;
-  padding: 8px 16px;
-  background-color: #0059C8;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  transition: background-color 0.2s;
-}
-
-.downloadLink:hover {
-  background-color: #004299;
 }
 
 .resolutionControls {
@@ -77,14 +78,6 @@
   align-items: center;
   gap: 8px;
   font-size: 14px;
-  cursor: pointer;
-}
-
-.checkboxLabel {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
   cursor: pointer;
 }
 
@@ -107,4 +100,42 @@
 
 .downloadZipButton:hover:not(:disabled) {
   opacity: 0.9;
+}
+
+/* 각 해상도별 이미지 비율 설정 */
+.mainBanner {
+  --aspect-ratio: calc(570 / 2000);
+}
+
+.subBanner {
+  --aspect-ratio: calc(318 / 1098);
+}
+
+.square {
+  --aspect-ratio: calc(720 / 720);
+}
+
+.mediumBanner {
+  --aspect-ratio: calc(261 / 549);
+}
+
+.smallBannerH {
+  --aspect-ratio: calc(204 / 366);
+}
+
+.smallBannerV {
+  --aspect-ratio: calc(522 / 366);
+}
+
+.smallBannerM {
+  --aspect-ratio: calc(261 / 366);
+}
+
+.thumbnail {
+  --aspect-ratio: calc(145 / 260);
+}
+
+.uploader {
+  width: 100%;
+  max-width: 600px;
 }
