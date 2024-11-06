@@ -1,57 +1,56 @@
 body {
   margin: 0;
-  padding: 0 24px 24px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  background: var(--background-color);
-  color: var(--text-color);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  background-color: #935d8c;
+  background-image: url("/src/assets/overlay.png"), 
+    linear-gradient(336deg, #e37682 15%, #5f4d93 85%);
+  color: var(--ui-control-text-color);
 }
 
-/* setting vars on body too, to prevent unstyled state when theme is not picked yet */
-body, body.theme--light {
-  color-scheme: light;
-
-  --background-color: #F7F9FA;
-  --text-color: #000;
-
-  --ui-text-color: #9393a6;
-  --ui-control-border-color-default: #CBCDD7;
-  --ui-control-border-color-focus: #0059C8;
-  --ui-control-background-color: #fcfcfe;
-  --ui-control-box-shadow-color: rgba(199, 215, 255, .5);
-  --ui-control-outline-color-focus: #98cbff;
-  --ui-control-text-color: #323236;
-
-  --ui-action-button-background: #0059C8;
-  --ui-action-button-text-color: #fff;
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
-body.theme--dark {
-  /* restyle browser controls */
-  color-scheme: dark;
-
-  --background-color: #080605;
-  --text-color: #fff;
-
-  --ui-text-color: #6c6c59;
-  --ui-control-border-color-default: #343228;
-  --ui-control-border-color-focus: #ffa637;
-  --ui-control-background-color: #030301;
-  --ui-control-box-shadow-color: rgba(56, 40, 0, .5);
-  --ui-control-outline-color-focus: #673400;
-  --ui-control-text-color: #cdcdc9;
-
-  --ui-action-button-background: #ffa637;
-  --ui-action-button-text-color: #000;
+.title {
+  font-size: 2.5em;
+  color: #ffffff;
+  margin-bottom: 0.5em;
+  text-align: center;
 }
 
-a {
-  text-decoration: none;
+.subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2em;
+  margin-bottom: 2em;
 }
 
-img, svg {
-  display: block;
+.logo-container {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  backdrop-filter: blur(5px);
+}
+
+.logo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 브라우저 호환성을 위한 벤더 프리픽스 추가 */
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .logo-container {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
 }

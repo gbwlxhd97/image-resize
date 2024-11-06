@@ -148,100 +148,108 @@ export default function RegularView() {
   };
 
   return (
-    <div>
-      <uc-config
-        ctx-name="my-uploader-3"
-        pubkey="a6ca334c3520777c0045"
-        sourceList="local, url, camera, dropbox"
-        multiple={true}
-        imgOnly={true}
-      ></uc-config>
-      <uc-file-uploader-regular
-        ctx-name="my-uploader-3"
-        class={st.uploader}
-      ></uc-file-uploader-regular>
-      <uc-upload-ctx-provider
-        ctx-name="my-uploader-3"
-        ref={ctxProviderRef}
-      ></uc-upload-ctx-provider>
+    <div className="container">
+      <h1 className="title">Image Resizer</h1>
+      <p className="subtitle">- By juyeon</p>
+      <div className="logo">
+        <img src="/src/assets/main_img.jpg" alt="Image Resizer Logo" />
+      </div>
+      
+      <div>
+        <uc-config
+          ctx-name="my-uploader-3"
+          pubkey="a6ca334c3520777c0045"
+          sourceList="local, url, camera, dropbox"
+          multiple={true}
+          imgOnly={true}
+        ></uc-config>
+        <uc-file-uploader-regular
+          ctx-name="my-uploader-3"
+          class={st.uploader}
+        ></uc-file-uploader-regular>
+        <uc-upload-ctx-provider
+          ctx-name="my-uploader-3"
+          ref={ctxProviderRef}
+        ></uc-upload-ctx-provider>
 
-      <div className={st.previewsContainer}>
-        {files.map((file) => (
-          <div key={file.uuid} className={st.filePreview}>
-            <h3 className={st.fileName}>{file.fileInfo.originalFilename}</h3>
-            <p className={st.fileSize}>{formatSize(file.fileInfo.size)}</p>
+        <div className={st.previewsContainer}>
+          {files.map((file) => (
+            <div key={file.uuid} className={st.filePreview}>
+              <h3 className={st.fileName}>{file.fileInfo.originalFilename}</h3>
+              <p className={st.fileSize}>{formatSize(file.fileInfo.size)}</p>
 
-            <div className={st.resolutionControls}>
-              <label className={st.selectAllLabel}>
-                <input
-                  type="checkbox"
-                  onChange={(e) => handleSelectAll(file.uuid, e.target.checked)}
-                  checked={
-                    Object.values(selectedResolutions[file.uuid] || {}).every(
-                      Boolean
-                    ) &&
-                    Object.values(selectedResolutions[file.uuid] || {})
-                      .length === RESOLUTIONS.length
-                  }
-                />
-                전체 선택
-              </label>
-            </div>
+              <div className={st.resolutionControls}>
+                <label className={st.selectAllLabel}>
+                  <input
+                    type="checkbox"
+                    onChange={(e) => handleSelectAll(file.uuid, e.target.checked)}
+                    checked={
+                      Object.values(selectedResolutions[file.uuid] || {}).every(
+                        Boolean
+                      ) &&
+                      Object.values(selectedResolutions[file.uuid] || {})
+                        .length === RESOLUTIONS.length
+                    }
+                  />
+                  전체 선택
+                </label>
+              </div>
 
-            <div className={st.resolutionGrid}>
-              {RESOLUTIONS.map((resolution) => (
-                <div key={resolution.label} className={st.resolutionItem}>
-                  <label className={st.checkboxLabel}>
-                    <input
-                      type="checkbox"
-                      checked={
-                        selectedResolutions[file.uuid]?.[
-                          `${resolution.width}x${resolution.height}`
-                        ] || false
-                      }
-                      onChange={(e) =>
-                        handleResolutionSelect(
-                          file.uuid,
-                          `${resolution.width}x${resolution.height}`,
-                          e.target.checked
-                        )
-                      }
-                    />
-                    {resolution.label} ({resolution.width}x{resolution.height})
-                  </label>
-                  <div
-                    className={`${st.imageWrapper} ${getAspectRatioClass(
-                      resolution.label
-                    )}`}
-                  >
-                    <img
-                      className={st.previewImage}
-                      src={`${file.cdnUrl}/-/preview/-/resize/${resolution.width}x${resolution.height}/`}
-                      alt={`${resolution.label} - ${file.fileInfo.originalFilename}`}
-                    />
+              <div className={st.resolutionGrid}>
+                {RESOLUTIONS.map((resolution) => (
+                  <div key={resolution.label} className={st.resolutionItem}>
+                    <label className={st.checkboxLabel}>
+                      <input
+                        type="checkbox"
+                        checked={
+                          selectedResolutions[file.uuid]?.[
+                            `${resolution.width}x${resolution.height}`
+                          ] || false
+                        }
+                        onChange={(e) =>
+                          handleResolutionSelect(
+                            file.uuid,
+                            `${resolution.width}x${resolution.height}`,
+                            e.target.checked
+                          )
+                        }
+                      />
+                      {resolution.label} ({resolution.width}x{resolution.height})
+                    </label>
+                    <div
+                      className={`${st.imageWrapper} ${getAspectRatioClass(
+                        resolution.label
+                      )}`}
+                    >
+                      <img
+                        className={st.previewImage}
+                        src={`${file.cdnUrl}/-/preview/-/resize/${resolution.width}x${resolution.height}/`}
+                        alt={`${resolution.label} - ${file.fileInfo.originalFilename}`}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            <div className={st.buttonGroup}>
-              <button
-                className={st.downloadZipButton}
-                onClick={() => handleDownloadZip(file)}
-                disabled={!Object.values(selectedResolutions[file.uuid] || {}).some(Boolean)}
-              >
-                선택한 이미지 ZIP으로 다운로드
-              </button>
-              <button
-                className={st.downloadCSVButton}
-                onClick={() => handleDownloadCSV(file)}
-                disabled={!Object.values(selectedResolutions[file.uuid] || {}).some(Boolean)}
-              >
-                선택한 이미지 URL CSV로 다운로드
-              </button>
+              <div className={st.buttonGroup}>
+                <button
+                  className={st.downloadZipButton}
+                  onClick={() => handleDownloadZip(file)}
+                  disabled={!Object.values(selectedResolutions[file.uuid] || {}).some(Boolean)}
+                >
+                  선택한 이미지 ZIP으로 다운로드
+                </button>
+                <button
+                  className={st.downloadCSVButton}
+                  onClick={() => handleDownloadCSV(file)}
+                  disabled={!Object.values(selectedResolutions[file.uuid] || {}).some(Boolean)}
+                >
+                  선택한 이미지 URL CSV로 다운로드
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

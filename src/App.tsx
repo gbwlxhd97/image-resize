@@ -7,12 +7,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/*" element={<Layout/>}>
+        {/* <Route path="/*" element={<Layout/>}> */}
           <Route
-            path=""
+            path="/"
             element={<RegularView/>}
           />
-        </Route>
+        {/* </Route> */}
       </Routes>
     </BrowserRouter>
   );
