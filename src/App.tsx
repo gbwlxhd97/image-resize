@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import RegularView from './views/RegularView/RegularView';
 
@@ -7,19 +7,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Navigate
-              to="/regular"
-              replace
-            />
-          }
-        />
-
         <Route path="/*" element={<Layout/>}>
           <Route
-            path="regular"
+            path=""
             element={<RegularView/>}
           />
         </Route>
