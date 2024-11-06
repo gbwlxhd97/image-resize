@@ -128,6 +128,25 @@ export default function RegularView() {
     }
   };
 
+  const handleDownloadCSV = (file: OutputFileEntry<'success'>) => {
+    const selectedItems = RESOLUTIONS.filter(resolution => 
+      selectedResolutions[file.uuid]?.[`${resolution.width}x${resolution.height}`]
+    );
+
+    const csvContent = [
+      ['Label', 'Width', 'Height', 'URL'].join(','),
+      ...selectedItems.map(resolution => [
+        resolution.label,
+        resolution.width,
+        resolution.height,
+        `${file.cdnUrl}/-/preview/-/resize/${resolution.width}x${resolution.height}/`
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    saveAs(blob, `${file.fileInfo.originalFilename}_resized_urls.csv`);
+  };
+
   return (
     <div>
       <uc-config
@@ -205,17 +224,22 @@ export default function RegularView() {
               ))}
             </div>
 
-            <button
-              className={st.downloadZipButton}
-              onClick={() => handleDownloadZip(file)}
-              disabled={
-                !Object.values(selectedResolutions[file.uuid] || {}).some(
-                  Boolean
-                )
-              }
-            >
-              선택한 이미지 ZIP으로 다운로드
-            </button>
+            <div className={st.buttonGroup}>
+              <button
+                className={st.downloadZipButton}
+                onClick={() => handleDownloadZip(file)}
+                disabled={!Object.values(selectedResolutions[file.uuid] || {}).some(Boolean)}
+              >
+                선택한 이미지 ZIP으로 다운로드
+              </button>
+              <button
+                className={st.downloadCSVButton}
+                onClick={() => handleDownloadCSV(file)}
+                disabled={!Object.values(selectedResolutions[file.uuid] || {}).some(Boolean)}
+              >
+                선택한 이미지 URL CSV로 다운로드
+              </button>
+            </div>
           </div>
         ))}
       </div>

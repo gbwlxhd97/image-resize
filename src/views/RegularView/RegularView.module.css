@@ -81,24 +81,43 @@
   cursor: pointer;
 }
 
-.downloadZipButton {
+.buttonGroup {
+  display: flex;
+  gap: 12px;
   margin-top: 24px;
+}
+
+.downloadZipButton,
+.downloadCSVButton {
+  flex: 1;
   padding: 12px 24px;
-  background-color: var(--ui-action-button-background);
-  color: var(--ui-action-button-text-color);
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
 }
 
-.downloadZipButton:disabled {
+.downloadZipButton {
+  background-color: var(--ui-action-button-background);
+  color: var(--ui-action-button-text-color);
+}
+
+.downloadCSVButton {
+  background-color: var(--ui-secondary-button-background, #4CAF50);
+  color: var(--ui-action-button-text-color);
+}
+
+.downloadZipButton:disabled,
+.downloadCSVButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.downloadZipButton:hover:not(:disabled) {
+.downloadZipButton:hover:not(:disabled),
+.downloadCSVButton:hover:not(:disabled) {
   opacity: 0.9;
 }
 
