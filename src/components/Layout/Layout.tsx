@@ -25,19 +25,6 @@ export default function Layout() {
         </a>
 
         <ul className={st.menu}>
-          <li className={st.menuItem}>
-            <NavLink
-              to="/form"
-              className={getMenuLinkClassName}
-            >Real-life form</NavLink>
-          </li>
-
-          <li className={st.menuItem}>
-            <NavLink
-              to="/minimal"
-              className={getMenuLinkClassName}
-            >Minimal uploader</NavLink>
-          </li>
 
           <li className={st.menuItem}>
             <NavLink

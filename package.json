@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/file-saver": "^2.0.7",
     "@uploadcare/file-uploader": "^1.2.0",
     "classnames": "2.3.2",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.20.0",

@@ -1,34 +1,110 @@
-.previews {
+.previewsContainer {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 32px;
   width: 100%;
   margin-top: 20px;
 }
 
-.previewWrapper {
+.filePreview {
   background-color: white;
-  color: darkslategray;
   border-radius: 12px;
-  padding: 15px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fileName {
+  font-size: 1.5rem;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.fileSize {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 24px 0;
+}
+
+.resolutionGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.resolutionItem {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 16px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.resolutionLabel {
+  font-size: 1rem;
+  margin: 0 0 12px 0;
+  color: #444;
 }
 
 .previewImage {
-  display: block;
-  object-fit: cover;
+  max-width: 100%;
+  height: auto;
   border-radius: 4px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
-.previewData {
-  margin: 0;
-  line-height: 1.4em;
-  font-size: 13px;
-  max-width: 200px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+.downloadLink {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #0059C8;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.downloadLink:hover {
+  background-color: #004299;
+}
+
+.resolutionControls {
+  margin-bottom: 16px;
+}
+
+.selectAllLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.downloadZipButton {
+  margin-top: 24px;
+  padding: 12px 24px;
+  background-color: var(--ui-action-button-background);
+  color: var(--ui-action-button-text-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.downloadZipButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.downloadZipButton:hover:not(:disabled) {
+  opacity: 0.9;
 }
